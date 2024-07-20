@@ -5685,6 +5685,9 @@ end
 
 -- Instances:
 
+wait(2)
+
+
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("ImageLabel")
 local exec = Instance.new("TextButton")
@@ -5702,7 +5705,7 @@ local src = Instance.new("TextBox")
 
 -- Properties:
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = game:GetService("CoreGui")
 
 Frame.Name = "Frame"
 Frame.Parent = ScreenGui
