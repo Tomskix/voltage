@@ -5680,194 +5680,243 @@ function LoadStr(str,env)
 		return nil, error
 	end
 end
--- Gui to Lua
--- Version: 3.6
 
--- Instances:
-
-wait(2)
+LoadStr("printidentity()")()
 
 
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("ImageLabel")
-local exec = Instance.new("TextButton")
-local sh = Instance.new("TextButton")
-local clr = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local TextLabel_2 = Instance.new("TextLabel")
-local TextLabel_3 = Instance.new("TextLabel")
-local Frame_2 = Instance.new("Frame")
-local Frame_3 = Instance.new("ImageLabel")
-local UIListLayout = Instance.new("UIListLayout")
-local TextButton = Instance.new("TextButton")
-local Frame_4 = Instance.new("ImageLabel")
-local src = Instance.new("TextBox")
+	getfenv().LoadBuffer = LoadString
 
--- Properties:
+	getfenv().HttpGet = function(RequestUrl)
+		local Promise = Instance.new("BindableEvent")
+		local Content
+	 
+		game:GetService("HttpService"):RequestInternal({Url = RequestUrl}):Start(function(Succeeded, Res)
+			if Succeeded == true and Res.StatusCode == 200 then
+				Content = Res.Body
+			else
+				Content = nil
+			end
+			Promise:Fire()
+		end)
+	 
+		Promise.Event:Wait()
+	 
+		return Content
+	end
 
-ScreenGui.Parent = game:GetService("CoreGui")
+	--getfenv().Env = getfenv().LoadBuffer(getfenv().HttpGet("https://raw.githubusercontent.com/AquaMan4094/GoWithTheFlow/main/Modules/Env.lua"))()
+	
+		local ScreenGui = Instance.new("ScreenGui")
+	local Frame = Instance.new("ImageLabel")
+	local exec = Instance.new("TextButton")
+	local sh = Instance.new("TextButton")
+	local clr = Instance.new("TextButton")
+	local TextLabel = Instance.new("TextLabel")
+	local TextLabel_2 = Instance.new("TextLabel")
+	local TextLabel_3 = Instance.new("TextLabel")
+	local src = Instance.new("TextBox")
+	local dc = Instance.new("TextButton")
+	local TextLabel_4 = Instance.new("TextLabel")
+	local shadowHolder = Instance.new("Frame")
+	local umbraShadow = Instance.new("ImageLabel")
+	local penumbraShadow = Instance.new("ImageLabel")
+	local ambientShadow = Instance.new("ImageLabel")
 
-Frame.Name = "Frame"
-Frame.Parent = ScreenGui
-Frame.Active = true
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.BackgroundTransparency = 1.000
-Frame.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Frame.Position = UDim2.new(0.120087333, 0, 0.104218364, 0)
-Frame.Selectable = true
-Frame.Size = UDim2.new(0, 535, 0, 343)
-Frame.Image = "rbxassetid://3570695787"
-Frame.ImageColor3 = Color3.fromRGB(37, 37, 37)
-Frame.ScaleType = Enum.ScaleType.Slice
-Frame.SliceCenter = Rect.new(100, 100, 100, 100)
-Frame.SliceScale = 0.040
-Frame.Draggable = true
+	-- Properties:
 
+	ScreenGui.Parent = game:GetService("CoreGui")
 
-exec.Name = "exec"
-exec.Parent = Frame
-exec.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-exec.BorderColor3 = Color3.fromRGB(0, 0, 0)
-exec.BorderSizePixel = 0
-exec.Position = UDim2.new(0.0250908118, 0, 0.876711845, 0)
-exec.Size = UDim2.new(0, 127, 0, 36)
-exec.Font = Enum.Font.SourceSans
-exec.Text = "EXECUTE"
-exec.TextColor3 = Color3.fromRGB(255, 255, 255)
-exec.TextSize = 18.000
+	Frame.Name = "Frame"
+	Frame.Parent = ScreenGui
+	Frame.Active = true
+	Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frame.BackgroundTransparency = 1.000
+	Frame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Frame.Position = UDim2.new(0.120087333, 0, 0.104218364, 0)
+	Frame.Selectable = true
+	Frame.Size = UDim2.new(0, 535, 0, 343)
+	Frame.Image = "rbxassetid://3570695787"
+	Frame.ImageColor3 = Color3.fromRGB(37, 37, 37)
+	Frame.ScaleType = Enum.ScaleType.Slice
+	Frame.SliceCenter = Rect.new(100, 100, 100, 100)
+	Frame.SliceScale = 0.040
+	Frame.Draggable = true 
 
-sh.Name = "sh"
-sh.Parent = Frame
-sh.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-sh.BorderColor3 = Color3.fromRGB(0, 0, 0)
-sh.BorderSizePixel = 0
-sh.Position = UDim2.new(0.531065643, 0, 0.876711845, 0)
-sh.Size = UDim2.new(0, 127, 0, 36)
-sh.Font = Enum.Font.SourceSans
-sh.Text = "SCRIPTHUB"
-sh.TextColor3 = Color3.fromRGB(255, 255, 255)
-sh.TextSize = 18.000
+	exec.Name = "exec"
+	exec.Parent = Frame
+	exec.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+	exec.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	exec.BorderSizePixel = 0
+	exec.Position = UDim2.new(0.0250908118, 0, 0.876711845, 0)
+	exec.Size = UDim2.new(0, 127, 0, 36)
+	exec.Font = Enum.Font.SourceSans
+	exec.Text = "EXECUTE"
+	exec.TextColor3 = Color3.fromRGB(255, 255, 255)
+	exec.TextSize = 18.000
 
-clr.Name = "clr"
-clr.Parent = Frame
-clr.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-clr.BorderColor3 = Color3.fromRGB(0, 0, 0)
-clr.BorderSizePixel = 0
-clr.Position = UDim2.new(0.277921081, 0, 0.876711845, 0)
-clr.Size = UDim2.new(0, 127, 0, 36)
-clr.Font = Enum.Font.SourceSans
-clr.Text = "CLEAR"
-clr.TextColor3 = Color3.fromRGB(255, 255, 255)
-clr.TextSize = 18.000
+	sh.Name = "sh"
+	sh.Parent = Frame
+	sh.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+	sh.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	sh.BorderSizePixel = 0
+	sh.Position = UDim2.new(0.531065643, 0, 0.876711845, 0)
+	sh.Size = UDim2.new(0, 127, 0, 36)
+	sh.Font = Enum.Font.SourceSans
+	sh.Text = "SCRIPTHUB"
+	sh.TextColor3 = Color3.fromRGB(255, 255, 255)
+	sh.TextSize = 18.000
 
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.0250908118, 0, -0.000737893686, 0)
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "VOLTAGE"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 127)
-TextLabel.TextSize = 25.000
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+	clr.Name = "clr"
+	clr.Parent = Frame
+	clr.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+	clr.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	clr.BorderSizePixel = 0
+	clr.Position = UDim2.new(0.277921081, 0, 0.876711845, 0)
+	clr.Size = UDim2.new(0, 127, 0, 36)
+	clr.Font = Enum.Font.SourceSans
+	clr.Text = "CLEAR"
+	clr.TextColor3 = Color3.fromRGB(255, 255, 255)
+	clr.TextSize = 18.000
 
-TextLabel_2.Parent = Frame
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(0.17410928, 0, -0.000737893686, 0)
-TextLabel_2.Size = UDim2.new(0, 200, 0, 50)
-TextLabel_2.Font = Enum.Font.SourceSans
-TextLabel_2.Text = ":"
-TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.TextSize = 25.000
-TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+	TextLabel.Parent = Frame
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.BorderSizePixel = 0
+	TextLabel.Position = UDim2.new(0.0250908118, 0, -0.000737893686, 0)
+	TextLabel.Size = UDim2.new(0, 200, 0, 50)
+	TextLabel.Font = Enum.Font.SourceSans
+	TextLabel.Text = "VOLTAGE"
+	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 127)
+	TextLabel.TextSize = 25.000
+	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-TextLabel_3.Parent = Frame
-TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_3.BackgroundTransparency = 1.000
-TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel_3.BorderSizePixel = 0
-TextLabel_3.Position = UDim2.new(0.190319538, 0, -0.000737893686, 0)
-TextLabel_3.Size = UDim2.new(0, 200, 0, 50)
-TextLabel_3.Font = Enum.Font.SourceSans
-TextLabel_3.Text = "ATTACHED"
-TextLabel_3.TextColor3 = Color3.fromRGB(85, 255, 127)
-TextLabel_3.TextSize = 25.000
-TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+	TextLabel_2.Parent = Frame
+	TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel_2.BackgroundTransparency = 1.000
+	TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel_2.BorderSizePixel = 0
+	TextLabel_2.Position = UDim2.new(0.17410928, 0, -0.000737893686, 0)
+	TextLabel_2.Size = UDim2.new(0, 200, 0, 50)
+	TextLabel_2.Font = Enum.Font.SourceSans
+	TextLabel_2.Text = ":"
+	TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel_2.TextSize = 25.000
+	TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
 
-Frame_2.Parent = Frame
-Frame_2.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Frame_2.BorderSizePixel = 0
-Frame_2.Position = UDim2.new(0.797459483, 0, -0.000737938157, 0)
-Frame_2.Size = UDim2.new(0, 70, 0, 343)
+	TextLabel_3.Parent = Frame
+	TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel_3.BackgroundTransparency = 1.000
+	TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel_3.BorderSizePixel = 0
+	TextLabel_3.Position = UDim2.new(0.190319538, 0, -0.000737893686, 0)
+	TextLabel_3.Size = UDim2.new(0, 200, 0, 50)
+	TextLabel_3.Font = Enum.Font.SourceSans
+	TextLabel_3.Text = "ATTACHED"
+	TextLabel_3.TextColor3 = Color3.fromRGB(85, 255, 127)
+	TextLabel_3.TextSize = 25.000
+	TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
 
-Frame_3.Name = "Frame"
-Frame_3.Parent = Frame_2
-Frame_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame_3.BackgroundTransparency = 1.000
-Frame_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Frame_3.Position = UDim2.new(0, 0, 0.0196702257, 0)
-Frame_3.Size = UDim2.new(0, 107, 0, 336)
-Frame_3.Image = "rbxassetid://3570695787"
-Frame_3.ImageColor3 = Color3.fromRGB(42, 42, 42)
-Frame_3.ScaleType = Enum.ScaleType.Slice
-Frame_3.SliceCenter = Rect.new(100, 100, 100, 100)
-Frame_3.SliceScale = 0.040
+	src.Name = "src"
+	src.Parent = Frame
+	src.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+	src.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	src.BorderSizePixel = 0
+	src.Position = UDim2.new(0.0239991099, 0, 0.138773307, 0)
+	src.Size = UDim2.new(0, 501, 0, 245)
+	src.ClearTextOnFocus = false
+	src.Font = Enum.Font.SourceSans
+	src.MultiLine = true
+	src.PlaceholderText = "print(\"voltage is the future\")"
+	src.Text = "print(\"Hello World!\")"
+	src.TextColor3 = Color3.fromRGB(255, 255, 255)
+	src.TextSize = 14.000
+	src.TextXAlignment = Enum.TextXAlignment.Left
+	src.TextYAlignment = Enum.TextYAlignment.Top
 
-UIListLayout.Parent = Frame_3
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	dc.Name = "dc"
+	dc.Parent = Frame
+	dc.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
+	dc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	dc.BorderSizePixel = 0
+	dc.Position = UDim2.new(0.785271227, 0, 0.876711845, 0)
+	dc.Size = UDim2.new(0, 93, 0, 36)
+	dc.Font = Enum.Font.SourceSans
+	dc.Text = "DISCORD"
+	dc.TextColor3 = Color3.fromRGB(255, 255, 255)
+	dc.TextSize = 18.000
 
-TextButton.Parent = Frame_3
-TextButton.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
-TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0, 0, 0.0583090372, 0)
-TextButton.Size = UDim2.new(0, 107, 0, 30)
-TextButton.ZIndex = 2
-TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = "YOURSCRIPT"
-TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.TextSize = 16.000
+	TextLabel_4.Parent = Frame
+	TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel_4.BackgroundTransparency = 1.000
+	TextLabel_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel_4.BorderSizePixel = 0
+	TextLabel_4.Position = UDim2.new(0.767889559, 0, 0.0284166262, 0)
+	TextLabel_4.Size = UDim2.new(0, 200, 0, 50)
+	TextLabel_4.Font = Enum.Font.SourceSans
+	TextLabel_4.Text = ""
+	TextLabel_4.TextColor3 = Color3.fromRGB(85, 255, 127)
+	TextLabel_4.TextSize = 25.000
+	TextLabel_4.TextXAlignment = Enum.TextXAlignment.Left
 
-Frame_4.Name = "Frame"
-Frame_4.Parent = Frame_2
-Frame_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame_4.BackgroundTransparency = 1.000
-Frame_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
-Frame_4.Position = UDim2.new(0, 0, 8.89725342e-08, 0)
-Frame_4.Size = UDim2.new(0, 107, 0, 342)
-Frame_4.Image = "rbxassetid://3570695787"
-Frame_4.ImageColor3 = Color3.fromRGB(42, 42, 42)
-Frame_4.ScaleType = Enum.ScaleType.Slice
-Frame_4.SliceCenter = Rect.new(100, 100, 100, 100)
-Frame_4.SliceScale = 0.040
+	shadowHolder.Name = "shadowHolder"
+	shadowHolder.Parent = Frame
+	shadowHolder.BackgroundTransparency = 1.000
+	shadowHolder.Position = UDim2.new(-0.0112149529, 0, -0.0204081181, 0)
+	shadowHolder.Size = UDim2.new(1.02429891, 0, 1.03790081, 0)
+	shadowHolder.ZIndex = 0
 
-src.Name = "src"
-src.Parent = Frame
-src.BackgroundColor3 = Color3.fromRGB(42, 42, 42)
-src.BorderColor3 = Color3.fromRGB(0, 0, 0)
-src.BorderSizePixel = 0
-src.Position = UDim2.new(0.0239990801, 0, 0.138773307, 0)
-src.Size = UDim2.new(0, 398, 0, 245)
-src.ClearTextOnFocus = false
-src.Font = Enum.Font.SourceSans
-src.MultiLine = true
-src.PlaceholderText = "print(\"voltage is the future\")"
-src.Text = "print(\"Hello World!\")"
-src.TextColor3 = Color3.fromRGB(255, 255, 255)
-src.TextSize = 14.000
-src.TextXAlignment = Enum.TextXAlignment.Left
-src.TextYAlignment = Enum.TextYAlignment.Top
+	umbraShadow.Name = "umbraShadow"
+	umbraShadow.Parent = shadowHolder
+	umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	umbraShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+	umbraShadow.BackgroundTransparency = 1.000
+	umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+	umbraShadow.Size = UDim2.new(1, 4, 1, 4)
+	umbraShadow.ZIndex = 0
+	umbraShadow.Image = "rbxassetid://1316045217"
+	umbraShadow.ImageColor3 = Color3.fromRGB(64, 74, 0)
+	umbraShadow.ImageTransparency = 0.860
+	umbraShadow.ScaleType = Enum.ScaleType.Slice
+	umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
-exec.MouseButton1Click:Connect(function()
-    LoadStr(src.Text)()
+	penumbraShadow.Name = "penumbraShadow"
+	penumbraShadow.Parent = shadowHolder
+	penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	penumbraShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+	penumbraShadow.BackgroundTransparency = 1.000
+	penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+	penumbraShadow.Size = UDim2.new(1, 4, 1, 4)
+	penumbraShadow.ZIndex = 0
+	penumbraShadow.Image = "rbxassetid://1316045217"
+	penumbraShadow.ImageColor3 = Color3.fromRGB(64, 74, 0)
+	penumbraShadow.ImageTransparency = 0.880
+	penumbraShadow.ScaleType = Enum.ScaleType.Slice
+	penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+	ambientShadow.Name = "ambientShadow"
+	ambientShadow.Parent = shadowHolder
+	ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	ambientShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+	ambientShadow.BackgroundTransparency = 1.000
+	ambientShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+	ambientShadow.Size = UDim2.new(1, 4, 1, 4)
+	ambientShadow.ZIndex = 0
+	ambientShadow.Image = "rbxassetid://1316045217"
+	ambientShadow.ImageColor3 = Color3.fromRGB(64, 74, 0)
+	ambientShadow.ImageTransparency = 0.880
+	ambientShadow.ScaleType = Enum.ScaleType.Slice
+	ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+	exec.MouseButton1Click:Connect(function()
+		LoadStr(src.Text)()
+	end)
+	clr.MouseButton1Click:Connect(function()
+		src.Text = ""
+	end)
 end)
 
-clr.MouseButton1Click:Connect(function()
-    src.Text = ""
+
 end)
+
+return Constants
